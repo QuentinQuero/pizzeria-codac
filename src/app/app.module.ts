@@ -6,7 +6,6 @@ import { HomeComponent } from './home/home.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {APIInterceptor} from "./HttpInterceptor";
 import { CartComponent } from './cart/cart.component';
-import { FormsModule }   from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,8 +15,7 @@ import { FormsModule }   from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
-    FormsModule
+    HttpClientModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
