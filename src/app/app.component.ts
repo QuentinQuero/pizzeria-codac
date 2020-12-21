@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'pizzeria-codac';
+  pizza = {name: '4 fromages', base:'fromage', price:'8$',ingredients:['fromage1','fromage2','fromage3']}
 }

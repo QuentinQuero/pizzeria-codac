@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-pizza',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pizza.component.css']
 })
 export class PizzaComponent implements OnInit {
+
+  @Input() pizza;
 
   constructor() { }
 
