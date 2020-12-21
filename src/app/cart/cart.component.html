@@ -1,24 +1,35 @@
-<button (click)="createPizza(1, 1, 1, 1)" type="submit">ADD</button>
+<form #f="ngForm" (ngSubmit)="createPizza(f)">
+  <label for="qty">Quantity : </label>
+  <input type="number" ngModel name="qty" id="qty">
+  <br>
+  <label for="name">Name : </label>
+  <input type="number" ngModel name="name" id="name">
+  <br>
+  <label for="dough">Dough : </label>
+  <input type="number" ngModel name="dough" id="dough">
+  <br>
+  <label for="size">Size : </label>
+  <input type="number" ngModel name="size" id="size">
+  <br>
+  <input type="submit" value="ADD">
+</form>
 
-<div>
 
-  <div class="float-left">
-    <strong>Pizza :</strong>
-    <div *ngFor="let pizza of pizzas">
-      <p>{{pizza.name}} | {{pizza.id}}</p>
+
+<div class="w-75 border border-secondary mx-auto">
+  <div>
+    <p class="font-weight-bold">MON PANIER</p>
+    <hr>
+    <div *ngFor="let pizzacreated of pizzacreateds">
+      <div class="d-flex justify-content-between">
+        <p>{{pizzacreated.number}} x {{pizzacreated.pizza.name}}, {{pizzacreated.dough.name}} (+{{pizzacreated.dough.addedPrice}}€), {{pizzacreated.pizza_size.name}} (+{{pizzacreated.pizza_size.addedPrice}}€) | {{pizzacreated.pizza.price}}€</p>
+        <button type="button" class="btn btn-danger">X</button>
+      </div>
+      <hr>
+    </div>
+    <div class="d-flex justify-content-between">
+      <p class="font-weight-bold">TOTAL : {{getCount()}} €</p>
+      <button type="button" class="btn btn-success">Paiement</button>
     </div>
   </div>
-
-  <div class="float-right">
-    <strong>Dough :</strong>
-    <div *ngFor="let dough of doughs">
-      <p>{{dough.name}} | {{dough.id}}</p>
-    </div>
-
-    <strong>Size :</strong>
-    <div *ngFor="let size of sizes">
-      <p>{{size.name}} | {{size.id}}</p>
-    </div>
-  </div>
-
 </div>
