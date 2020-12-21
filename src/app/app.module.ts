@@ -8,13 +8,15 @@ import {APIInterceptor} from "./HttpInterceptor";
 import { FooterComponent } from './footer/footer.component';
 import { CartComponent } from './cart/cart.component';
 import { FormsModule }   from '@angular/forms';
+import { PizzaComponent } from './pizza/pizza.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     FooterComponent,
-    CartComponent
+    CartComponent,
+    PizzaComponent
   ],
   imports: [
     BrowserModule,
