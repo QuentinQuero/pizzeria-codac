@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
@@ -15,7 +16,8 @@ import { CartComponent } from './cart/cart.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
