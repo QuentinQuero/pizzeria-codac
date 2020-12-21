@@ -1,0 +1,9 @@
+<p>cart works!</p>
+
+<form #f="ngForm" (ngSubmit)="addToCart(f)">
+    <label for="name">Pizza : </label>
+    <input type="text" ngModel name="name" id="name">
+    <input type="submit" value="Submit">
+</form>
+
+<button (click)="listCart()" type="submit">Mon panier</button>
