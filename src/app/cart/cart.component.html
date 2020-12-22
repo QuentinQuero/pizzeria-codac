@@ -1,0 +1,24 @@
+<button (click)="createPizza(1, 1, 1, 1)" type="submit">ADD</button>
+
+<div>
+
+  <div class="float-left">
+    <strong>Pizza :</strong>
+    <div *ngFor="let pizza of pizzas">
+      <p>{{pizza.name}} | {{pizza.id}}</p>
+    </div>
+  </div>
+
+  <div class="float-right">
+    <strong>Dough :</strong>
+    <div *ngFor="let dough of doughs">
+      <p>{{dough.name}} | {{dough.id}}</p>
+    </div>
+
+    <strong>Size :</strong>
+    <div *ngFor="let size of sizes">
+      <p>{{size.name}} | {{size.id}}</p>
+    </div>
+  </div>
+
+</div>
