@@ -37,8 +37,46 @@
   <div class="card-body">
     <div *ngFor="let pizzaInCart of pizzaInCarts">
       <div class="d-flex justify-content-between">
-        <p>{{pizzaInCart.number}} x {{pizzaInCart.pizza.name}}, {{pizzaInCart.dough.name}} (+{{pizzaInCart.dough.addedPrice}}€), {{pizzaInCart.pizza_size.name}} (+{{pizzaInCart.pizza_size.addedPrice}}€) | {{pizzaInCart.pizza.price}}€</p>
-        <button type="button" class="btn btn-danger">X</button>
+
+        <div>
+          <img class="content-image rounded my-auto " height="200px" width="200px" src="http://web.cryfter.ovh:1337{{pizzaInCart.pizza.image.url}}">
+        </div>
+
+        <div class="my-auto">
+          <!-- <p>{{pizzaInCart.number}} x {{pizzaInCart.pizza.name}}, {{pizzaInCart.dough.name}} (+{{pizzaInCart.dough.addedPrice}}€), {{pizzaInCart.pizza_size.name}} (+{{pizzaInCart.pizza_size.addedPrice}}€) | {{pizzaInCart.pizza.price}}€</p> -->
+          <p><strong>Name : </strong>{{pizzaInCart.pizza.name}}</p>
+          <p><strong>Price : </strong>{{pizzaInCart.number * (pizzaInCart.pizza.price + pizzaInCart.dough.addedPrice + pizzaInCart.pizza_size.addedPrice)}} €</p>
+        </div>
+
+        <div>
+          <form #f="ngForm" (ngSubmit)="createPizza(f)">
+
+            <div class="w-75 mt-4">
+              <input type="number" class="form-control input-sm" ngModel=1 name="qty" id="qty">
+            </div>
+
+            <div class="w-75 mt-4">
+              <select name="dough" class="form-control custom-select custom-select-sm" ngModel id="dough">
+                  <option value="" selected>Your dough...</option>
+                  <option *ngFor="let dough of doughs" [value]="dough.id">
+                  {{dough.name}}
+                  </option>
+              </select>
+            </div>
+
+            <div class="w-75 mt-4">
+              <select name="size" class="form-control custom-select custom-select-sm" ngModel id="size">
+                  <option value="" selected>Your size...</option>
+                  <option *ngFor="let size of sizes" [value]="size.id">
+                  {{size.name}}
+                  </option>
+              </select>
+            </div>
+
+          </form>
+        </div>
+
+        <button type="button" class="btn btn-danger h-25 my-auto">X</button>
       </div>
       <hr>
     </div>
