@@ -1,4 +1,4 @@
-<form #f="ngForm" (ngSubmit)="createPizza(f)">
+<!-- <form #f="ngForm" (ngSubmit)="createPizza(f)">
   <label for="qty">Quantity : </label>
   <input type="number" ngModel name="qty" id="qty">
   <br>
@@ -27,14 +27,14 @@
    </select>
   <br>
   <input type="submit" value="ADD">
-</form>
+</form> -->
 
-<button type="button" (click)="createCommande([18, 19])" class="btn btn-success">NEW COMMAND</button>
+<!-- <button type="button" (click)="createCommande([18, 19])" class="btn btn-success">NEW COMMAND</button> -->
 
-<div class="w-75 border border-secondary mx-auto">
-  <div>
-    <p class="font-weight-bold">MON PANIER</p>
-    <hr>
+<div class="card mt-3 w-75 mx-auto">
+  <div class="card-header h5 font-weight-bold">MON PANIER</div>
+
+  <div class="card-body">
     <div *ngFor="let pizzaInCart of pizzaInCarts">
       <div class="d-flex justify-content-between">
         <p>{{pizzaInCart.number}} x {{pizzaInCart.pizza.name}}, {{pizzaInCart.dough.name}} (+{{pizzaInCart.dough.addedPrice}}€), {{pizzaInCart.pizza_size.name}} (+{{pizzaInCart.pizza_size.addedPrice}}€) | {{pizzaInCart.pizza.price}}€</p>
@@ -42,9 +42,11 @@
       </div>
       <hr>
     </div>
-    <div class="d-flex justify-content-between">
-      <p class="font-weight-bold">TOTAL : {{getCount()}} €</p>
-      <button type="button" class="btn btn-success">Paiement</button>
-    </div>
   </div>
+
+  <div class="card-footer d-flex justify-content-between">
+    <p class="font-weight-bold my-auto">TOTAL : {{getCount()}} €</p>
+    <button type="button" class="btn btn-success">Paiement</button>
+  </div>
+
 </div>
