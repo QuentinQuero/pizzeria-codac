@@ -3,26 +3,41 @@
   <input type="number" ngModel name="qty" id="qty">
   <br>
   <label for="name">Name : </label>
-  <input type="number" ngModel name="name" id="name">
+  <select name="name" ngModel id="name">
+      <option value="" selected>--Choose your pizza--</option>
+      <option *ngFor="let pizza of pizzas" [value]="pizza.id">
+      {{pizza.name}}
+      </option>
+   </select>
   <br>
   <label for="dough">Dough : </label>
-  <input type="number" ngModel name="dough" id="dough">
+  <select name="dough" ngModel id="dough">
+      <option value="" selected>--Choose your dough--</option>
+      <option *ngFor="let dough of doughs" [value]="dough.id">
+      {{dough.name}}
+      </option>
+   </select>
   <br>
   <label for="size">Size : </label>
-  <input type="number" ngModel name="size" id="size">
+  <select name="size" ngModel id="size">
+      <option value="" selected>--Choose your size--</option>
+      <option *ngFor="let size of sizes" [value]="size.id">
+      {{size.name}}
+      </option>
+   </select>
   <br>
   <input type="submit" value="ADD">
 </form>
 
-
+<button type="button" (click)="createCommande([18, 19])" class="btn btn-success">NEW COMMAND</button>
 
 <div class="w-75 border border-secondary mx-auto">
   <div>
     <p class="font-weight-bold">MON PANIER</p>
     <hr>
-    <div *ngFor="let pizzacreated of pizzacreateds">
+    <div *ngFor="let pizzaInCart of pizzaInCarts">
       <div class="d-flex justify-content-between">
-        <p>{{pizzacreated.number}} x {{pizzacreated.pizza.name}}, {{pizzacreated.dough.name}} (+{{pizzacreated.dough.addedPrice}}€), {{pizzacreated.pizza_size.name}} (+{{pizzacreated.pizza_size.addedPrice}}€) | {{pizzacreated.pizza.price}}€</p>
+        <p>{{pizzaInCart.number}} x {{pizzaInCart.pizza.name}}, {{pizzaInCart.dough.name}} (+{{pizzaInCart.dough.addedPrice}}€), {{pizzaInCart.pizza_size.name}} (+{{pizzaInCart.pizza_size.addedPrice}}€) | {{pizzaInCart.pizza.price}}€</p>
         <button type="button" class="btn btn-danger">X</button>
       </div>
       <hr>

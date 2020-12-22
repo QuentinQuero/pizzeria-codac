@@ -11,7 +11,12 @@ export class CartComponent implements OnInit {
 
   constructor(private _httpClient: HttpClient) { }
 
-  pizzacreateds: Object = [];
+  pizzaInCarts: Array<{id: number, number: number, name: string, dough: string, pizza_size: string}>= [];
+  // pizzaInCarts: Object = [];
+
+  pizzas: Object = [];
+  doughs: Object = [];
+  sizes: Object = [];
 
   createPizza(f: NgForm) {
     var newPizza = {
@@ -22,26 +27,55 @@ export class CartComponent implements OnInit {
     };
     this._httpClient.post('pizza-createds', newPizza)
       .subscribe(pizzacreateds => {
-        this.pizzacreateds = pizzacreateds;
         console.log(pizzacreateds)
+      });
+  }
+
+  createCommande(pizzas) {
+    var newCommande = {
+      payed: false,
+      pizza_createds: pizzas
+    };
+    this._httpClient.post('commandes', newCommande)
+      .subscribe(commandes => {
+        console.log(commandes)
       });
   }
 
   getCount() {
     var count = 0;
-    for (const [key, value] of Object.entries(this.pizzacreateds)) {
-      count += value.number * (value.pizza.price + value.dough.addedPrice + value.pizza_size.addedPrice);
+    for (const [key, value] of Object.entries(this.pizzaInCarts)) {
+      // count += value.number * (value.pizza.price + value.dough.addedPrice + value.pizza_size.addedPrice);
     }
     return count;
   }
 
+  getCart(id) {
+    this._httpClient.get(`pizza-createds/${id}`)
+      .subscribe(pizzaInCarts => {
+        // this.pizzaInCarts.push(pizzaInCarts)
+        console.log(pizzaInCarts)
+      });
+  }
+
 
   ngOnInit(): void {
-    this._httpClient.get('pizza-createds')
-      .subscribe(pizzacreateds => {
-        this.pizzacreateds = pizzacreateds;
-        console.log(pizzacreateds)
-      });
+    this._httpClient.get('pizzas')
+      .subscribe(pizzas => {
+        this.pizzas = pizzas;
+    });
+
+    this._httpClient.get('doughs')
+      .subscribe(doughs => {
+        this.doughs = doughs;
+    });
+
+    this._httpClient.get('pizza-sizes')
+      .subscribe(sizes => {
+        this.sizes = sizes;
+    });
+
+    // this.getCart(18)
   }
 
 }
