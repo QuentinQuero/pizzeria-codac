@@ -1,7 +1,6 @@
-<div>
-  ingredients :
-  <div *ngFor="let ingredient of ingredients">
-    <p>{{ingredient.name}}</p>
+<div class="row mt-4 mb-4">
+  <div class="col-lg-6 col-md-12" style="height: 200px;" *ngFor="let InputPizza of pizzas">
+    <app-pizza [Pizza]="InputPizza"></app-pizza>
   </div>
 </div>
 
