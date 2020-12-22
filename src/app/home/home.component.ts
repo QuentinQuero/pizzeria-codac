@@ -8,15 +8,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
 
-  ingredients: Object = [];
+  pizzas: Object = [];
 
   constructor(private _httpClient: HttpClient) { }
 
   ngOnInit(): void {
-    this._httpClient.get('ingredients')
-      .subscribe(ingredients => {
+    this._httpClient.get('pizzas')
+      .subscribe(pizzas => {
 
-        this.ingredients = ingredients;
+        this.pizzas = pizzas;
       });
   }
 
