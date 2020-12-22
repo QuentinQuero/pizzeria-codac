@@ -1,14 +1,23 @@
-  <div class="product">
-    <div class="container mb-5 mt-5">
-      <div class="row border rounded overflow-hidden position-relative">
-        <div class="col p-4 d-inline-flex flex-column ">
-          <h3 class="name mb-2">{{pizza.name}}</h3>
-          <div class="base mb-2 ">{{pizza.base}}</div>
-          <div class="price mb-2 text-muted ">{{pizza.price}}</div>
-          <div class="card-text mb-auto">{{pizza.ingredients}}</div>
-          <a href="#" class="text-danger">Buy Pizza</a>
+<div class="product" style="width: 18rem; height: 24rem;">
+
+<!--  todo attention aux contraintes appliquées au dessus lors de du merge  -->
+
+    <div class="border rounded position-relative">
+      <div class="text-center p-4 d-inline-flex flex-column w-100">
+        <h3 class="mb-2">{{pizza.name}}</h3>
+        <div class="mb-2 ">Base : {{pizza.base}}</div>
+        <div class="mb-2 text-muted ">{{pizza.price}}€</div>
+        <a href="#" class="text-danger">Ajouter</a>
+      </div>
+      <div class="p-4 text-center">
+        <div class="content">
+        <div class="content">
+          <div class="content-overlay"></div> <img class="content-image rounded m-auto " height="200px" width="200px" src="{{pizza.img.url}}">
+          <div class="content-details fadeIn-bottom">
+              <p class="content-text" *ngFor="let ingredient of pizza.ingredients">{{ingredient.name}}</p>
+          </div>
         </div>
-        <div class="col p-4 d-flex">
-          <img src={{pizza.img}} class="rounded float-right" height="200px" width="200px">
-        </div>
+      </div>
+    </div>
   </div>
+</div>
