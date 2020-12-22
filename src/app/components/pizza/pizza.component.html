@@ -1,1 +1,23 @@
-<p>pizza works!</p>
+<div class="product w-100 h-100">
+
+<!--  todo attention aux contraintes appliquées au dessus lors de du merge  -->
+
+    <div class="border rounded position-relative">
+      <div class="text-center p-4 d-inline-flex flex-column w-100">
+        <h3 class="mb-2">{{pizza.name}}</h3>
+        <div class="mb-2 ">Base : {{pizza.base}}</div>
+        <div class="mb-2 text-muted ">{{pizza.price}}€</div>
+        <a href="#" class="text-danger">Ajouter</a>
+      </div>
+      <div class="p-4 text-center">
+        <div class="content">
+        <div class="content">
+          <div class="content-overlay"></div> <img class="content-image rounded m-auto " height="200px" width="200px" src="http://web.cryfter.ovh:1337{{pizza.image.url}}">
+          <div class="content-details fadeIn-bottom">
+              <p class="content-text" *ngFor="let ingredient of pizza.ingredients">{{ingredient.name}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
