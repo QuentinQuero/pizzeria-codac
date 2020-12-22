@@ -9,7 +9,7 @@ import {APIInterceptor} from "./HttpInterceptor";
 import { FooterComponent } from './components/footer/footer.component';
 import { CartComponent } from './cart/cart.component';
 import { FormsModule }   from '@angular/forms';
-import { PizzaComponent } from './components/pizza/pizza.component';
+import { PizzaComponent } from './components/pizza/pizza.component'
 
 @NgModule({
   declarations: [
