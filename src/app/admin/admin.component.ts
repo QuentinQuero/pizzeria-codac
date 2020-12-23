@@ -10,6 +10,7 @@ import {NgForm} from '@angular/forms';
 export class AdminComponent implements OnInit {
 
   commandes:Object = [];
+  pizzas: Object = [];
 
   constructor(private _httpClient: HttpClient) { }
 
@@ -18,6 +19,10 @@ export class AdminComponent implements OnInit {
       .subscribe(commandes => {
 
         this.commandes = commandes;
+      });
+    this._httpClient.get('pizzas')
+      .subscribe(pizzas => {
+        this.pizzas = pizzas;
       });
   }
 
