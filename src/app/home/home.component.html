@@ -32,7 +32,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-          <button type="button" *ngIf="sizeSelected != null && doughSelected != null" class="btn btn-primary" (click)="validatePizzaSelection()">Valider</button>
+          <button type="button" *ngIf="sizeSelected != null && doughSelected != null" class="btn btn-primary" (click)="validatePizzaSelection()" data-bs-dismiss="modal">Valider</button>
         </div>
       </div>
     </div>
