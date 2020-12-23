@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-home',
@@ -8,18 +9,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
 
+  private cookieValue: string;
   pizzas: Object = [];
   pizza_size = [];
   doughs = [];
 
   pizzaSelected = {};
-
   numberPizzas = 1;
   sizeSelected = null;
   doughSelected = null;
+  constructor(private _httpClient: HttpClient,private cookieService: CookieService) { }
 
-
-  constructor(private _httpClient: HttpClient) { }
 
   ngOnInit(): void {
     this._httpClient.get('pizzas')
@@ -57,9 +57,21 @@ export class HomeComponent implements OnInit {
 
     this._httpClient.post('pizza-createds', objToSend)
       .subscribe(response => {
-        console.log(response);
+        // @ts-ignore
+        this.addPizza(response.id);
       });
 
+  }
+
+  addPizza(id){
+    let pizzas:Array<number>
+    if (this.cookieService.check('pizza')) {
+      pizzas = JSON.parse(this.cookieService.get('pizza'));
+    } else  {
+      pizzas = [];
+    }
+    pizzas.push(id);
+    this.cookieService.set('pizza', JSON.stringify(pizzas));
   }
 
 }
