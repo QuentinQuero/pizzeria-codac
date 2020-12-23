@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   pizza_size = [];
   doughs = [];
 
-  pizzaSelected = {};
+  pizzaSelected : {name, base, price, ingredients:[{name}], image: {url}};
   numberPizzas = 1;
   sizeSelected = null;
   doughSelected = null;
