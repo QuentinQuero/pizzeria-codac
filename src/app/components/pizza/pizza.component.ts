@@ -14,37 +14,15 @@ export class PizzaComponent implements OnInit {
   @Input() douths;
   @Output() pizzaEvent = new EventEmitter<Object>();
 
-  numberPizzas = 1;
-  sizeSelected = null;
-  doughSelected = null;
-
   constructor(private _httpClient: HttpClient) { }
 
   ngOnInit(): void {
   }
 
-
-  public validatePizzaSelection () {
-    let currentSize = this.sizes.find(sizeSelected => sizeSelected.name == this.sizeSelected);
-    let currentDough = this.douths.find(doughSelected => doughSelected.name == this.doughSelected);
-
-    let objToSend = {
-      number: this.numberPizzas,
-      pizza: this.pizza,
-      dough: currentDough,
-      pizza_size: currentSize
-    }
-
-    // number: f.value.qty,
-    //   pizza: f.value.name,
-    //   dough: f.value.dough,
-    //   pizza_size: f.value.size
-
-    this._httpClient.post('pizza-createds', objToSend)
-      .subscribe(response => {
-        console.log(response);
-      });
-
+  sendPizza(){
+    this.pizzaEvent.emit(this.pizza);
   }
+
+
 
 }
