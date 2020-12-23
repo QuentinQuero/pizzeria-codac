@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 import {EventEmitter} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-pizza',
@@ -10,16 +11,18 @@ export class PizzaComponent implements OnInit {
 
   @Input() pizza: {name, base, price, ingredients:[{name}], image: {url}};
   @Input() sizes;
-  @Input() douth;
+  @Input() douths;
   @Output() pizzaEvent = new EventEmitter<Object>();
 
-  constructor() { }
+  constructor(private _httpClient: HttpClient) { }
 
   ngOnInit(): void {
   }
 
-  public onClick = pizza => {
-    this.pizzaEvent.emit(pizza);
+  sendPizza(){
+    this.pizzaEvent.emit(this.pizza);
   }
+
+
 
 }
