@@ -1,6 +1,41 @@
 <div class="row mt-4 mb-4">
   <div class="mt-4 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-12"  *ngFor="let InputPizza of pizzas">
-    <app-pizza [pizza]="InputPizza"></app-pizza>
+    <app-pizza (pizzaEvent)="selectPizza($event)" [sizes]="pizza_size" [douths]="doughs" [pizza]="InputPizza"></app-pizza>
+  </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Créez votre pizza</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Pizza {{pizzaSelected.name}}
+          <h5>Combien de pizzas voulez vous ?</h5>
+          <!--                    <select class="form-select" aria-label="Default select example" [(ngModel)]="sizeSelected">-->
+          <!--                      <option *ngFor="let size of sizes" value="{{size}}" [selected]="sizes[0] == size">{{size.name}}</option>-->
+          <!--                    </select>-->
+          <input class="form-control" min="1" type="number" value="1" max="10" [(ngModel)]="numberPizzas">
+
+          <h5>Selectionnez la taille de votre pizza</h5>
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="sizeSelected">
+            <option *ngFor="let size of pizza_size" value="{{size.name}}">
+              {{size.name}}
+            </option>
+          </select>
+
+          <h5>Selectionnez la pate de votre pizza</h5>
+          <select class="form-select" aria-label="Default select example" [(ngModel)]="doughSelected">
+            <option *ngFor="let douth of doughs" value="{{douth.name}}">{{douth.name}}</option>
+          </select>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" *ngIf="sizeSelected != null && doughSelected != null" class="btn btn-primary" (click)="validatePizzaSelection()" data-bs-dismiss="modal">Valider</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
