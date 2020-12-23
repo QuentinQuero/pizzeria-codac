@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
@@ -7,63 +8,46 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  // name: string
-  // id: number = 0
-
-  // listCart() {
-  //   var pizza
-  //   var cart = document.cookie.split('; ')
-  //   cart.forEach(function (item) {
-  //     pizza = item.split('=')[1],
-  //     console.log(pizza)
-  //   });
-  // }
-
-  // addToCart(f: NgForm) {
-  //     this.name = f.value.name
-  //     console.log(this.name)
-  //     document.cookie = "pizza"+this.id+"="+this.name;
-  //     this.id++
-  // }
 
   constructor(private _httpClient: HttpClient) { }
 
-  pizzacreateds: Object = [];
-  pizzas: Object = [];
+  pizzaInCarts = [19, 20, 21] // todo remplacer par les cookies de la commande
+
+  pizzas = [];
   doughs: Object = [];
   sizes: Object = [];
 
-  createPizza(qty, name, dough, size) {
-    this._httpClient.post('pizza-createds', {number: qty, pizza: name, dough: dough, pizza_size: size})
-      .subscribe(pizzacreateds => {
+  calculTotalPrice() {
+    let count = 0;
+    this.pizzas.forEach(pizza => {
+      count += pizza.number * (pizza.pizza.price + pizza.dough.addedPrice + pizza.pizza_size.addedPrice);
+    })
+    return count;
+  }
 
-        this.pizzacreateds = pizzacreateds;
-        console.log(pizzacreateds)
+  getCart(id) {
+    this._httpClient.get(`pizza-createds/${id}`)
+      .subscribe(pizzaInCarts => {
+        this.pizzas.push(pizzaInCarts);
       });
   }
 
+
   ngOnInit(): void {
-    this._httpClient.get('pizza-createds')
-      .subscribe(pizzacreateds => {
 
-        this.pizzacreateds = pizzacreateds;
-        console.log(pizzacreateds)
-      });
+    this._httpClient.get('doughs')
+      .subscribe(doughs => {
+        this.doughs = doughs;
+    });
 
-      this._httpClient.get('pizzas')
-      .subscribe(pizza => {
-        this.pizzas = pizza;
-      });
+    this._httpClient.get('pizza-sizes')
+      .subscribe(sizes => {
+        this.sizes = sizes;
+    });
 
-      this._httpClient.get('doughs')
-      .subscribe(dough => {
-        this.doughs = dough;
-      });
-
-      this._httpClient.get('pizza-sizes')
-      .subscribe(size => {
-        this.sizes = size;
-      });
+    this.pizzaInCarts.forEach(pizzaCreated => {
+      this.getCart(pizzaCreated);
+    })
   }
 
 }

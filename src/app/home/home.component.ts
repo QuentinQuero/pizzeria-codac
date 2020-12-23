@@ -9,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
 export class HomeComponent implements OnInit {
 
   pizzas: Object = [];
+  pizza_size = {};
+  dough: Object = [];
 
   constructor(private _httpClient: HttpClient) { }
 
@@ -18,6 +20,25 @@ export class HomeComponent implements OnInit {
 
         this.pizzas = pizzas;
       });
+    this._httpClient.get('pizza-sizes')
+      .subscribe(pizza_size => {
+
+        this.pizza_size = pizza_size;
+      });
+    this._httpClient.get('doughs')
+      .subscribe(dough => {
+
+        this.dough = dough;
+      });
+  }
+
+  createPizza(pizza){
+
+    // this._httpClient.post('pizza-createds', {pizza})
+    //   .subscribe(pizzas => {
+    //
+    //     this.pizzas = pizzas;
+    //   });
   }
 
 }

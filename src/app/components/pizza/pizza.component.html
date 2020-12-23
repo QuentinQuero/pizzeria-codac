@@ -6,8 +6,36 @@
       <div class="text-center p-4 d-inline-flex flex-column w-100">
         <h3 class="mb-2">{{pizza.name}}</h3>
         <div class="mb-2 ">Base : {{pizza.base}}</div>
-        <div class="mb-2 text-muted ">{{pizza.price}}€</div>
-        <a href="#" class="text-danger">Ajouter</a>
+<!--        <div class="mb-2 text-muted "></div>-->
+<!--        <a (click)="onClick(pizza)" class="text-danger">Ajouter</a>-->
+        <button type="button" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#exampleModal">
+          {{pizza.price}}€
+        </button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Créez votre pizza</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+<!--                <div *ngFor="let size of sizes">-->
+<!--                  {{size.name}}-->
+<!--                </div>-->
+
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>Selectionnez la taille de votre pizza</option>
+                  <option *ngFor="let size of sizes" value="{{size}}">{{size.name}}</option>
+                </select>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary">Valider</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="p-4 text-center">
         <div class="content">
