@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-admin',
@@ -10,7 +9,7 @@ import {NgForm} from '@angular/forms';
 export class AdminComponent implements OnInit {
 
   commandes:Object = [];
-  pizzas: Object = [];
+  pizzacreateds: Object = [];
 
   constructor(private _httpClient: HttpClient) { }
 
@@ -20,10 +19,12 @@ export class AdminComponent implements OnInit {
 
         this.commandes = commandes;
       });
-    this._httpClient.get('pizzas')
-      .subscribe(pizzas => {
-        this.pizzas = pizzas;
-      });
+    this._httpClient.get('pizza-createds')
+    .subscribe(pizzacreateds => {
+
+      this.pizzacreateds = pizzacreateds;
+      console.log(pizzacreateds)
+    });
   }
 
   changeAccepted(isAccepted, id) {
