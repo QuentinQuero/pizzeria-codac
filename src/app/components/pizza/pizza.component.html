@@ -1,14 +1,14 @@
 <div class="product w-100 h-100">
 
     <!--  todo attention aux contraintes appliquées au dessus lors de du merge  -->
-    
+
         <div class="border rounded position-relative">
           <div class="text-center p-4 d-inline-flex flex-column w-100">
             <h3 class="mb-2">{{pizza.name}}</h3>
             <div class="mb-2 ">Base : {{pizza.base}}</div>
     <!--        <div class="mb-2 text-muted "></div>-->
     <!--        <a (click)="onClick(pizza)" class="text-danger">Ajouter</a>-->
-            <button type="button" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="selectPizza()">
               {{pizza.price}}€
             </button>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -19,19 +19,29 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-    
-    <!--                <div *ngFor="let size of sizes">-->
-    <!--                  {{size.name}}-->
-    <!--                </div>-->
-    
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>Selectionnez la taille de votre pizza</option>
-                      <option *ngFor="let size of sizes" value="{{size}}">{{size.name}}</option>
+                    Pizza
+                    <h5>Combien de pizzas voulez vous ?</h5>
+<!--                    <select class="form-select" aria-label="Default select example" [(ngModel)]="sizeSelected">-->
+<!--                      <option *ngFor="let size of sizes" value="{{size}}" [selected]="sizes[0] == size">{{size.name}}</option>-->
+<!--                    </select>-->
+                    <input class="form-control" min="1" type="number" value="1" max="10" [(ngModel)]="numberPizzas">
+
+                    <h5>Selectionnez la taille de votre pizza</h5>
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="sizeSelected">
+                      <option *ngFor="let size of sizes" value="{{size.name}}">
+                        {{size.name}}
+                      </option>
                     </select>
+
+                    <h5>Selectionnez la pate de votre pizza</h5>
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="doughSelected">
+                      <option *ngFor="let douth of douths" value="{{douth.name}}">{{douth.name}}</option>
+                    </select>
+
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary">Valider</button>
+                    <button type="button" *ngIf="sizeSelected != null && doughSelected != null" class="btn btn-primary" (click)="validatePizzaSelection()">Valider</button>
                   </div>
                 </div>
               </div>
@@ -49,4 +59,3 @@
         </div>
       </div>
     </div>
-    
