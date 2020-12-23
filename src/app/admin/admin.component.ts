@@ -20,9 +20,4 @@ export class AdminComponent implements OnInit {
         this.commandes = commandes;
       });
   }
-  modifyAccepted (f: NgForm) {
-    let idcommand = f.value.idcommand;
-    console.log(idcommand);
-    this._httpClient.put(`commandes/${idcommand}`,{ "accepted": true})
-  }
 }

@@ -24,12 +24,4 @@
           </tr>
         </tbody>
     </table>
-    <h2 class="font-italic">Modifier une commande</h2>
-    <form #f="ngForm" (ngSubmit)="modifyAccepted(f)" ngNativeValidate>
-      <p for="exampleFormControlSelect1">Choisissez la commande à accepter : </p>
-      <select name="idcommand" ngModel class="form-control" id="exampleFormControlSelect1">
-          <option *ngFor="let commande of commandes" value="{{commande.id}}">{{ commande.id }}</option>
-      </select>
-      <button type="submit" class="btn btn-success mt-2">Enregister</button>
-    </form>
 </div>
