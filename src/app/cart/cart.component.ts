@@ -11,7 +11,7 @@ export class CartComponent implements OnInit {
 
   constructor(private _httpClient: HttpClient) { }
 
-  pizzaInCarts = [20, 21, 22]
+  pizzaInCarts = [19, 20, 21]
 
   pizzas = [];
   doughs: Object = [];
@@ -41,28 +41,23 @@ export class CartComponent implements OnInit {
       });
   }
 
-  // getCount() {
-  //   var count = 0;
-  //   for (const [key, value] of Object.entries(this.pizzaInCarts)) {
-  //     count += value.number * (value.pizza.price + value.dough.addedPrice + value.pizza_size.addedPrice);
-  //   }
-  //   return count;
-  // }
+  getCount() {
+    var count = 0;
+    this.pizzas.forEach(pizza => {
+      count += pizza.number * (pizza.pizza.price + pizza.dough.addedPrice + pizza.pizza_size.addedPrice);
+    })
+    return count;
+  }
 
   getCart(id) {
     this._httpClient.get(`pizza-createds/${id}`)
       .subscribe(pizzaInCarts => {
-        // this.pizzaInCarts.push(pizzaInCarts)
         this.pizzas.push(pizzaInCarts);
       });
   }
 
 
   ngOnInit(): void {
-    // this._httpClient.get('pizzas')
-    //   .subscribe(pizzas => {
-    //     this.pizzas = pizzas;
-    // });
 
     this._httpClient.get('doughs')
       .subscribe(doughs => {
@@ -77,12 +72,6 @@ export class CartComponent implements OnInit {
     this.pizzaInCarts.forEach(pizzaCreated => {
       this.getCart(pizzaCreated);
     })
-
-    // this._httpClient.get('pizza-createds')
-    //   .subscribe(pizzaInCarts => {
-    //     this.pizzaInCarts = pizzaInCarts;
-    // });
-    // this.getCart(18)
   }
 
 }
