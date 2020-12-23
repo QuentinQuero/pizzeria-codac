@@ -11,6 +11,7 @@ import { CartComponent } from './cart/cart.component';
 import { FormsModule }   from '@angular/forms';
 import { PizzaComponent } from './components/pizza/pizza.component';
 import { HeaderComponent } from './Core/header/header.component'
+import { AdminComponent } from './admin/admin.component'
 
 @NgModule({
   declarations: [
@@ -19,12 +20,14 @@ import { HeaderComponent } from './Core/header/header.component'
     FooterComponent,
     CartComponent,
     PizzaComponent,
-    HeaderComponent
+    HeaderComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
