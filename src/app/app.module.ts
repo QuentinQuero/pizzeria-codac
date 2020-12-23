@@ -24,7 +24,8 @@ import { HeaderComponent } from './Core/header/header.component'
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
