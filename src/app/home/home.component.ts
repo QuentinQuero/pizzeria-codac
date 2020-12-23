@@ -41,11 +41,6 @@ export class HomeComponent implements OnInit {
 
   selectPizza(pizza){
     this.pizzaSelected = pizza;
-    // this._httpClient.post('pizza-createds', {pizza})
-    //   .subscribe(pizzas => {
-    //
-    //     this.pizzas = pizzas;
-    //   });
   }
 
 
@@ -59,11 +54,6 @@ export class HomeComponent implements OnInit {
       dough: currentDough,
       pizza_size: currentSize
     }
-
-    // number: f.value.qty,
-    //   pizza: f.value.name,
-    //   dough: f.value.dough,
-    //   pizza_size: f.value.size
 
     this._httpClient.post('pizza-createds', objToSend)
       .subscribe(response => {
