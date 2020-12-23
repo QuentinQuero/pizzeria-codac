@@ -17,29 +17,29 @@ export class CartComponent implements OnInit {
   doughs: Object = [];
   sizes: Object = [];
 
-  createPizza(f: NgForm) {
-    var newPizza = {
-      number: f.value.qty,
-      pizza: f.value.name,
-      dough: f.value.dough,
-      pizza_size: f.value.size
-    };
-    this._httpClient.post('pizza-createds', newPizza)
-      .subscribe(pizzacreateds => {
-        console.log(pizzacreateds)
-      });
-  }
+  // createPizza(f: NgForm) {
+  //   var newPizza = {
+  //     number: f.value.qty,
+  //     pizza: f.value.name,
+  //     dough: f.value.dough,
+  //     pizza_size: f.value.size
+  //   };
+  //   this._httpClient.post('pizza-createds', newPizza)
+  //     .subscribe(pizzacreateds => {
+  //       console.log(pizzacreateds)
+  //     });
+  // }
 
-  createCommande(pizzas) {
-    var newCommande = {
-      payed: false,
-      pizza_createds: pizzas
-    };
-    this._httpClient.post('commandes', newCommande)
-      .subscribe(commandes => {
-        console.log(commandes)
-      });
-  }
+  // createCommande(pizzas) {
+  //   var newCommande = {
+  //     payed: false,
+  //     pizza_createds: pizzas
+  //   };
+  //   this._httpClient.post('commandes', newCommande)
+  //     .subscribe(commandes => {
+  //       console.log(commandes)
+  //     });
+  // }
 
   getCount() {
     var count = 0;
