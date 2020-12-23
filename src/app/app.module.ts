@@ -10,7 +10,8 @@ import { FooterComponent } from './Core/footer/footer.component';
 import { CartComponent } from './cart/cart.component';
 import { FormsModule }   from '@angular/forms';
 import { PizzaComponent } from './components/pizza/pizza.component';
-import { HeaderComponent } from './Core/header/header.component'
+import { HeaderComponent } from './Core/header/header.component';
+import { CookieService } from 'angular2-cookie/service/cookies.service';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { HeaderComponent } from './Core/header/header.component'
     provide: HTTP_INTERCEPTORS,
     useClass: APIInterceptor,
     multi: true,
+    CookieService
   }
   ],
   bootstrap: [AppComponent]
