@@ -1,90 +1,54 @@
-<!-- <form #f="ngForm" (ngSubmit)="createPizza(f)">
-  <label for="qty">Quantity : </label>
-  <input type="number" ngModel name="qty" id="qty">
-  <br>
-  <label for="name">Name : </label>
-  <select name="name" ngModel id="name">
-      <option value="" selected>--Choose your pizza--</option>
-      <option *ngFor="let pizza of pizzas" [value]="pizza.id">
-      {{pizza.name}}
-      </option>
-   </select>
-  <br>
-  <label for="dough">Dough : </label>
-  <select name="dough" ngModel id="dough">
-      <option value="" selected>--Choose your dough--</option>
-      <option *ngFor="let dough of doughs" [value]="dough.id">
-      {{dough.name}}
-      </option>
-   </select>
-  <br>
-  <label for="size">Size : </label>
-  <select name="size" ngModel id="size">
-      <option value="" selected>--Choose your size--</option>
-      <option *ngFor="let size of sizes" [value]="size.id">
-      {{size.name}}
-      </option>
-   </select>
-  <br>
-  <input type="submit" value="ADD">
-</form> -->
-
-<!-- <button type="button" (click)="createCommande([18, 19])" class="btn btn-success">NEW COMMAND</button> -->
-
 <div class="card mt-3 w-75 mx-auto">
   <div class="card-header h5 font-weight-bold">MON PANIER</div>
 
   <div class="card-body">
     <div *ngFor="let pizzaInCart of pizzas">
-      <div class="d-flex justify-content-between">
+      <div class="d-flex row justify-content-between">
 
-        <div>
-          <img class="content-image rounded my-auto " height="200px" width="200px" src="http://web.cryfter.ovh:1337{{pizzaInCart.pizza.image.url}}">
+        <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-xs-12 text-center">
+          <img class="content-image rounded my-auto " height="150px" width="150px" src="http://web.cryfter.ovh:1337{{pizzaInCart.pizza.image.url}}">
         </div>
 
-        <div class="my-auto">
-          <!-- <p>{{pizzaInCart.number}} x {{pizzaInCart.pizza.name}}, {{pizzaInCart.dough.name}} (+{{pizzaInCart.dough.addedPrice}}€), {{pizzaInCart.pizza_size.name}} (+{{pizzaInCart.pizza_size.addedPrice}}€) | {{pizzaInCart.pizza.price}}€</p> -->
-          <p><strong>Name : </strong>{{pizzaInCart.pizza.name}}</p>
-          <p><strong>Price : </strong>{{pizzaInCart.number * (pizzaInCart.pizza.price + pizzaInCart.dough.addedPrice + pizzaInCart.pizza_size.addedPrice)}} €</p>
+        <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-xs-12 my-auto text-center">
+          <div class="d-flex row justify-content-center mt-2">
+            <p class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-xs-12 m-1"><strong>Name : </strong>{{pizzaInCart.pizza.name}}</p>
+            <p class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-xs-12 m-1"><strong>Price : </strong>{{pizzaInCart.number * (pizzaInCart.pizza.price + pizzaInCart.dough.addedPrice + pizzaInCart.pizza_size.addedPrice)}} €</p>
+          </div>
+          <!-- <form #f="ngForm" (ngSubmit)="createPizza(f)"> -->
+            <div class="d-flex row justify-content-around mt-3">
+              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 mt-1">
+                <input type="number" class="form-control" [value]="pizzaInCart.number" name="qty">
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-1">
+                <select name="dough" class="form-control custom-select custom-select-sm">
+                    <option *ngFor="let dough of doughs" [value]="dough.id" [selected]="pizzaInCart.dough.id === dough.id">
+                    {{dough.name}}
+                    </option>
+                </select>
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-1">
+                <select name="size" class="form-control custom-select custom-select-sm" >
+                    <option *ngFor="let size of sizes" [value]="size.id"  [selected]="pizzaInCart.pizza_size.id === size.id">
+                    {{size.name}}
+                    </option>
+                </select>
+              </div>
+            </div>
+          <!-- </form> -->
         </div>
 
-        <div>
-          <form #f="ngForm" (ngSubmit)="createPizza(f)">
-
-            <div class="w-75 mt-4">
-              <input type="number" class="form-control input-sm" ngModel=1 name="qty" id="qty">
-            </div>
-
-            <div class="w-75 mt-4">
-              <select name="dough" class="form-control custom-select custom-select-sm" ngModel id="dough">
-                  <option value="{{pizzaInCart.dough.name}}" selected>Your dough...</option>
-                  <option *ngFor="let dough of doughs" [value]="dough.name">
-                  {{dough.name}}
-                  </option>
-              </select>
-            </div>
-
-            <div class="w-75 mt-4">
-              <select name="size" class="form-control custom-select custom-select-sm" ngModel id="size">
-                  <option value="" selected>Your size...</option>
-                  <option *ngFor="let size of sizes" [value]="size.id">
-                  {{size.name}}
-                  </option>
-              </select>
-            </div>
-
-          </form>
+        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-xs-12 text-center mt-1">
+          <button type="button" class="btn btn-danger my-auto">X</button>
         </div>
-
-        <button type="button" class="btn btn-danger h-25 my-auto">X</button>
       </div>
       <hr>
     </div>
   </div>
 
   <div class="card-footer d-flex justify-content-between">
-    <p class="font-weight-bold my-auto">TOTAL :  €</p>
-<!--    {{getCount()}}-->
+    <p class="font-weight-bold my-auto">TOTAL : {{calculTotalPrice()}} €</p>
     <button type="button" class="btn btn-success">Paiement</button>
   </div>
 
