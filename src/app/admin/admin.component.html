@@ -39,13 +39,22 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                      <div *ngFor="let pizza of commande.pizza_createds">
-                        <div *ngFor="let pizzacreated of pizzacreateds">
-                          <div *ngIf="pizza.id == pizzacreated.id">
-                            
+                        <div *ngFor="let pizzacreated of pizzacreateds; let i = index">
+                          <div *ngIf="commande.pizza_createds[0].id[0] == pizzacreated.id">
+                            <div class="row">
+                              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+                                <img class="content-image rounded my-auto " height="150px" width="150px" src="http://web.cryfter.ovh:1337{{pizzacreated.pizza.image.url}}">
+                              </div>
+                              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 my-auto text-center">
+                                <div class="d-flex row justify-content-center mt-2">
+                                  <p><strong>Name : </strong>{{pizzacreated.pizza.name}}<br>
+                                    <strong>Price : </strong>{{pizzacreated.pizza.price}} €
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
