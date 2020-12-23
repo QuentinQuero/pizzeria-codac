@@ -14,22 +14,21 @@
         <tbody>
           <tr *ngFor="let commande of commandes" class="text-center">
             <th scope="row">{{ commande.id }}</th>
-            <td>{{ commande.payed }}</td>
-            <td *ngif="commande.accepted; else elseblockaccepted">{{ commande.accepted }}</td>
-            <td #elseblockaccepted>null</td>
-            <td *ngif="commande.sent; else elseblocksent">{{ commande.sent }}</td>
-            <td #elseblocksent>null</td>
-            <td>{{ commande.published_at }}</td>
+            <td>
+              <input class="form-check-input" type="checkbox" [(ngModel)]="commande.payed" id="flexCheckDefault" (change)="changePayed(commande.payed, commande.id)" [checked]="commande.payed">
+            </td>
+            <td>
+              <input class="form-check-input" type="checkbox" [(ngModel)]="commande.accepted" id="flexCheckDefault" (change)="changeAccepted(commande.accepted, commande.id)" [checked]="commande.accepted">
+            </td>
+<!--            <td *ngif="commande.accepted; else elseblockaccepted">{{ commande.accepted }}</td>-->
+<!--            <td #elseblockaccepted>null</td>-->
+            <td>
+              <input class="form-check-input" type="checkbox" [(ngModel)]="commande.sent" value="" id="flexCheckDefault" (change)="changeSent(commande.sent, commande.id)" [checked]="commande.sent">
+            </td>
+<!--            <td #elseblocksent>null</td>-->
+            <td>{{commande.published_at}}</td>
             <td><button type="button" class="btn btn-primary">Pizzas</button></td>
           </tr>
         </tbody>
     </table>
-    <h2 class="font-italic">Modifier une commande</h2>
-    <form #f="ngForm" (ngSubmit)="modifyAccepted(f)" ngNativeValidate>
-      <p for="exampleFormControlSelect1">Choisissez la commande à accepter : </p>
-      <select name="idcommand" ngModel class="form-control" id="exampleFormControlSelect1">
-          <option *ngFor="let commande of commandes" value="{{commande.id}}">{{ commande.id }}</option>
-      </select>
-      <button type="submit" class="btn btn-success mt-2">Enregister</button>
-    </form>
 </div>
