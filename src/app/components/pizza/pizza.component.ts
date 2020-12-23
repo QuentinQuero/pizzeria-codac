@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
+import {EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-pizza',
@@ -8,10 +9,17 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PizzaComponent implements OnInit {
 
   @Input() pizza: {name, base, price, ingredients:[{name}], image: {url}};
+  @Input() sizes;
+  @Input() douth;
+  @Output() pizzaEvent = new EventEmitter<Object>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public onClick = pizza => {
+    this.pizzaEvent.emit(pizza);
   }
 
 }

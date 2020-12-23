@@ -35,7 +35,7 @@
   <div class="card-header h5 font-weight-bold">MON PANIER</div>
 
   <div class="card-body">
-    <div *ngFor="let pizzaInCart of pizzaInCarts">
+    <div *ngFor="let pizzaInCart of pizzas">
       <div class="d-flex justify-content-between">
 
         <div>
@@ -57,8 +57,8 @@
 
             <div class="w-75 mt-4">
               <select name="dough" class="form-control custom-select custom-select-sm" ngModel id="dough">
-                  <option value="" selected>Your dough...</option>
-                  <option *ngFor="let dough of doughs" [value]="dough.id">
+                  <option value="{{pizzaInCart.dough.name}}" selected>Your dough...</option>
+                  <option *ngFor="let dough of doughs" [value]="dough.name">
                   {{dough.name}}
                   </option>
               </select>
@@ -83,7 +83,8 @@
   </div>
 
   <div class="card-footer d-flex justify-content-between">
-    <p class="font-weight-bold my-auto">TOTAL : {{getCount()}} €</p>
+    <p class="font-weight-bold my-auto">TOTAL :  €</p>
+<!--    {{getCount()}}-->
     <button type="button" class="btn btn-success">Paiement</button>
   </div>
 

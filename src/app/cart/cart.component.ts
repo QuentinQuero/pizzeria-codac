@@ -11,10 +11,9 @@ export class CartComponent implements OnInit {
 
   constructor(private _httpClient: HttpClient) { }
 
-  // pizzaInCarts: Array<{id: number, number: number, name: string, dough: string, pizza_size: string}>= [];
-  pizzaInCarts: Object = [];
+  pizzaInCarts = [20, 21, 22]
 
-  pizzas: Object = [];
+  pizzas = [];
   doughs: Object = [];
   sizes: Object = [];
 
@@ -42,28 +41,28 @@ export class CartComponent implements OnInit {
       });
   }
 
-  getCount() {
-    var count = 0;
-    for (const [key, value] of Object.entries(this.pizzaInCarts)) {
-      count += value.number * (value.pizza.price + value.dough.addedPrice + value.pizza_size.addedPrice);
-    }
-    return count;
-  }
-
-  // getCart(id) {
-  //   this._httpClient.get(`pizza-createds/${id}`)
-  //     .subscribe(pizzaInCarts => {
-  //       // this.pizzaInCarts.push(pizzaInCarts)
-  //       console.log(pizzaInCarts)
-  //     });
+  // getCount() {
+  //   var count = 0;
+  //   for (const [key, value] of Object.entries(this.pizzaInCarts)) {
+  //     count += value.number * (value.pizza.price + value.dough.addedPrice + value.pizza_size.addedPrice);
+  //   }
+  //   return count;
   // }
+
+  getCart(id) {
+    this._httpClient.get(`pizza-createds/${id}`)
+      .subscribe(pizzaInCarts => {
+        // this.pizzaInCarts.push(pizzaInCarts)
+        this.pizzas.push(pizzaInCarts);
+      });
+  }
 
 
   ngOnInit(): void {
-    this._httpClient.get('pizzas')
-      .subscribe(pizzas => {
-        this.pizzas = pizzas;
-    });
+    // this._httpClient.get('pizzas')
+    //   .subscribe(pizzas => {
+    //     this.pizzas = pizzas;
+    // });
 
     this._httpClient.get('doughs')
       .subscribe(doughs => {
@@ -75,10 +74,14 @@ export class CartComponent implements OnInit {
         this.sizes = sizes;
     });
 
-    this._httpClient.get('pizza-createds')
-      .subscribe(pizzaInCarts => {
-        this.pizzaInCarts = pizzaInCarts;
-    });
+    this.pizzaInCarts.forEach(pizzaCreated => {
+      this.getCart(pizzaCreated);
+    })
+
+    // this._httpClient.get('pizza-createds')
+    //   .subscribe(pizzaInCarts => {
+    //     this.pizzaInCarts = pizzaInCarts;
+    // });
     // this.getCart(18)
   }
 
