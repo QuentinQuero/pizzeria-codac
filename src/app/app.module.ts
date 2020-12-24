@@ -11,6 +11,7 @@ import { CartComponent } from './cart/cart.component';
 import { FormsModule }   from '@angular/forms';
 import { PizzaComponent } from './components/pizza/pizza.component';
 import { HeaderComponent } from './Core/header/header.component'
+import { CookieService } from 'ngx-cookie-service'
 import { AdminComponent } from './admin/admin.component'
 
 @NgModule({
@@ -33,7 +34,8 @@ import { AdminComponent } from './admin/admin.component'
     provide: HTTP_INTERCEPTORS,
     useClass: APIInterceptor,
     multi: true,
-  }
+  },
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

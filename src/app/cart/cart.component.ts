@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {NgForm} from '@angular/forms';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-cart',
@@ -9,7 +9,7 @@ import {NgForm} from '@angular/forms';
 })
 export class CartComponent implements OnInit {
 
-  constructor(private _httpClient: HttpClient) { }
+  constructor(private _httpClient: HttpClient, private cookieService: CookieService) { }
 
   pizzaInCarts = [19, 20, 21] // todo remplacer par les cookies de la commande
 
@@ -45,9 +45,20 @@ export class CartComponent implements OnInit {
         this.sizes = sizes;
     });
 
+    this.getPizzaInCookies();
+
+
     this.pizzaInCarts.forEach(pizzaCreated => {
       this.getCart(pizzaCreated);
     })
+  }
+
+  getPizzaInCookies(){
+    if (this.cookieService.check('pizza')) {
+     this.pizzaInCarts = JSON.parse(this.cookieService.get('pizza'));
+    } else  {
+      this.pizzaInCarts = [];
+    }
   }
 
 }
