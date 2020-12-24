@@ -4,10 +4,10 @@
         <thead>
           <tr class="text-center">
             <th scope="col">#</th>
-            <th scope="col">Payed</th>
-            <th scope="col">Accepted</th>
-            <th scope="col">Sent</th>
-            <th scope="col">Published at</th>
+            <th scope="col">Payé</th>
+            <th scope="col">Accepté</th>
+            <th scope="col">Envoyé</th>
+            <th scope="col">Demandé il y a</th>
             <th scope="col">Plus de detail</th>
           </tr>
         </thead>
@@ -15,55 +15,56 @@
           <tr *ngFor="let commande of commandes" class="text-center">
             <th scope="row">{{ commande.id }}</th>
             <td>
-              <input class="form-check-input" type="checkbox" [(ngModel)]="commande.payed" id="flexCheckDefault" (change)="changePayed(commande.payed, commande.id)" [checked]="commande.payed">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="commande['payed']" (change)="changePayed(commande['payed'], commande.id)" [checked]="commande.payed">
             </td>
             <td>
-              <input class="form-check-input" type="checkbox" [(ngModel)]="commande.accepted" id="flexCheckDefault" (change)="changeAccepted(commande.accepted, commande.id)" [checked]="commande.accepted">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="commande['accepted']" (change)="changeAccepted(commande['accepted'], commande.id)" [checked]="commande.accepted">
             </td>
             <td>
-              <input class="form-check-input" type="checkbox" [(ngModel)]="commande.sent" value="" id="flexCheckDefault" (change)="changeSent(commande.sent, commande.id)" [checked]="commande.sent">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="commande['sent']" value="" (change)="changeSent(commande['sent'], commande.id)" [checked]="commande.sent">
             </td>
-            <td>{{commande.published_at | date:'fullDate'}}</td>
             <td>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Pizzas</button>
-<!--              <p *ngFor="let pizza of commande.Pizza_createds">-->
-<!--                {{pizza.name}}-->
-<!--              </p>-->
-              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Les pizzas</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                        <div *ngFor="let pizzacreated of pizzacreateds; let i = index">
-                          <div *ngIf="commande.pizza_createds[0].id[0] == pizzacreated.id">
-                            <div class="row">
-                              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
-                                <img class="content-image rounded my-auto " height="150px" width="150px" src="http://web.cryfter.ovh:1337{{pizzacreated.pizza.image.url}}">
-                              </div>
-                              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 my-auto text-center">
-                                <div class="d-flex row justify-content-center mt-2">
-                                  <p><strong>Name : </strong>{{pizzacreated.pizza.name}}<br>
-                                    <strong>Price : </strong>{{pizzacreated.pizza.price}} €
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {{commande['published_at'] | date:'fullDate' }}
+<!--              <input type="time" id="exampleInput" name="input" value="{{getTimeFromDate(commande['published_at'])}}}"-->
+<!--                     placeholder="HH:mm:ss" required />-->
+            </td>
+            <td>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="commandSelected(commande)">Pizzas</button>
             </td>
           </tr>
+
         </tbody>
+
     </table>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Les pizzas</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div *ngFor="let PizzasSelected of PizzasSelecteds">
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+              <img class="content-image rounded my-auto h-75 w-75" height="{{PizzasSelected.pizza.image.height}}px" width="{{PizzasSelected.pizza.image.height.width}}px" src="http://web.cryfter.ovh:1337{{PizzasSelected.pizza.image.url}}">
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 my-auto text-center">
+                <div class="d-flex row justify-content-center mt-2">
+                  <p><strong>{{PizzasSelected["number"]}}</strong><br>
+                    <strong>{{PizzasSelected["pizza"]["name"]}}</strong><br>
+                    <strong>Prix : </strong>{{PizzasSelected["pizza"]["price"]}} €
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>

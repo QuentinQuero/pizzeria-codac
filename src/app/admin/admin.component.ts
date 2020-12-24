@@ -8,9 +8,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AdminComponent implements OnInit {
 
-  commandes:Object = [];
-  pizzacreateds: Object = [];
-
+  commandes:any = [];
+  pizzacreateds: any = [];
+  PizzasSelecteds: any = [];
   constructor(private _httpClient: HttpClient) { }
 
   ngOnInit(): void {
@@ -19,12 +19,12 @@ export class AdminComponent implements OnInit {
 
         this.commandes = commandes;
       });
-    this._httpClient.get('pizza-createds')
-    .subscribe(pizzacreateds => {
-
-      this.pizzacreateds = pizzacreateds;
-      console.log(pizzacreateds)
-    });
+    // this._httpClient.get('pizza-createds')
+    // .subscribe(pizzacreateds => {
+    //
+    //   this.pizzacreateds = pizzacreateds;
+    //   console.log(pizzacreateds)
+    // });
   }
 
   changeAccepted(isAccepted, id) {
@@ -52,5 +52,21 @@ export class AdminComponent implements OnInit {
       .subscribe(commande => {
         console.log(commande);
     });
+  }
+
+  commandSelected(command){
+    //remove all previoisly selected
+    this.PizzasSelecteds = [];
+    // det all pizza_createds for details
+      command.pizza_createds.forEach(pizza_created => {
+        this._httpClient.get(`pizza-createds/${pizza_created.id}`)
+          .subscribe(pizzacreateds => {
+            this.PizzasSelecteds.push(pizzacreateds);
+          });
+      })
+  }
+
+  getTimeFromDate(date){
+    return new Date().getTime() - new Date(date).getTime();
   }
 }
