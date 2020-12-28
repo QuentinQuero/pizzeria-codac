@@ -2,7 +2,7 @@
   <div class="card-header h5 font-weight-bold">MON PANIER</div>
 
   <div class="card-body">
-    <div *ngFor="let pizzaInCart of pizzas">
+    <div *ngFor="let pizzaInCart of pizzas; let i = index">
       <div class="d-flex row justify-content-between">
 
         <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-xs-12 text-center">
@@ -12,16 +12,16 @@
         <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-xs-12 my-auto text-center">
           <div class="d-flex row justify-content-center mt-2">
             <p class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-xs-12 m-1"><strong>Name : </strong>{{pizzaInCart.pizza.name}}</p>
-            <p class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-xs-12 m-1"><strong>Price : </strong>{{pizzaInCart.number * (pizzaInCart.pizza.price + pizzaInCart.dough.addedPrice + pizzaInCart.pizza_size.addedPrice)}} €</p>
+            <p class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-xs-12 m-1"><strong>Price : </strong>{{calculOnePrice(i)}} €</p>
           </div>
           <!-- <form #f="ngForm" (ngSubmit)="createPizza(f)"> -->
             <div class="d-flex row justify-content-around mt-3">
               <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 mt-1">
-                <input type="number" class="form-control" [value]="pizzaInCart.number" name="qty">
+                <input #quantity (change)='quantityChange(quantity.value, i)' type="number" class="form-control" [value]="pizzaInCart.number" name="qty">
               </div>
 
               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-1">
-                <select name="dough" class="form-control custom-select custom-select-sm">
+                <select #dough (change)='doughChange(dough.value, i)' name="dough" class="form-control custom-select custom-select-sm">
                     <option *ngFor="let dough of doughs" [value]="dough.id" [selected]="pizzaInCart.dough.id === dough.id">
                     {{dough.name}}
                     </option>
@@ -29,7 +29,7 @@
               </div>
 
               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-1">
-                <select name="size" class="form-control custom-select custom-select-sm" >
+                <select #size (change)='sizeChange(size.value, i)' name="size" class="form-control custom-select custom-select-sm" >
                     <option *ngFor="let size of sizes" [value]="size.id"  [selected]="pizzaInCart.pizza_size.id === size.id">
                     {{size.name}}
                     </option>
@@ -40,7 +40,7 @@
         </div>
 
         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-xs-12 text-center mt-1">
-          <button type="button" class="btn btn-danger my-auto">X</button>
+          <button (click)=deleteInCookies(pizzaInCart.id) type="button" class="btn btn-danger my-auto">X</button>
         </div>
       </div>
       <hr>

@@ -11,7 +11,7 @@ export class CartComponent implements OnInit {
 
   constructor(private _httpClient: HttpClient, private cookieService: CookieService) { }
 
-  pizzaInCarts = [19, 20, 21] // todo remplacer par les cookies de la commande
+  pizzaInCarts = []
 
   pizzas = [];
   doughs: Object = [];
@@ -25,6 +25,25 @@ export class CartComponent implements OnInit {
     return count;
   }
 
+  calculOnePrice(id) {
+    let count = 0;
+    count += this.pizzas[id].number * (this.pizzas[id].pizza.price + this.pizzas[id].dough.addedPrice + this.pizzas[id].pizza_size.addedPrice);
+    return count;
+  }
+
+  quantityChange(qty, index) {
+    this.pizzas[index].number = qty
+    console.log
+  }
+
+  doughChange(dough, index) {
+    this.pizzas[index].dough.id = dough
+  }
+
+  sizeChange(size, index) {
+    this.pizzas[index].pizza_size.id = size
+  }
+
   getCart(id) {
     this._httpClient.get(`pizza-createds/${id}`)
       .subscribe(pizzaInCarts => {
@@ -32,6 +51,30 @@ export class CartComponent implements OnInit {
       });
   }
 
+  getPizzaInCookies(){
+    if (this.cookieService.check('pizza')) {
+     this.pizzaInCarts = JSON.parse(this.cookieService.get('pizza'));
+    } else  {
+      this.pizzaInCarts = [];
+    }
+  }
+
+  deleteInCookies(id) {
+    let cookies = JSON.parse(this.cookieService.get('pizza'));
+    for(var i= 0; i < cookies.length; i++){
+      if (cookies[i] == id) {
+        cookies.splice(i, 1)
+        this.cookieService.set('pizza', JSON.stringify(cookies));
+      }
+    }
+    console.log(this.pizzas)
+    for(var i= 0; i < this.pizzas.length; i++){
+      if (this.pizzas[i].id == id) {
+        this.pizzas.splice(i, 1)
+      }
+    }
+    console.log(this.pizzas)
+  }
 
   ngOnInit(): void {
 
@@ -47,18 +90,9 @@ export class CartComponent implements OnInit {
 
     this.getPizzaInCookies();
 
-
     this.pizzaInCarts.forEach(pizzaCreated => {
       this.getCart(pizzaCreated);
     })
-  }
-
-  getPizzaInCookies(){
-    if (this.cookieService.check('pizza')) {
-     this.pizzaInCarts = JSON.parse(this.cookieService.get('pizza'));
-    } else  {
-      this.pizzaInCarts = [];
-    }
   }
 
 }
