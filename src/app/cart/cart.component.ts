@@ -33,16 +33,21 @@ export class CartComponent implements OnInit {
 
   quantityChange(qty, index) {
     this.pizzas[index].number = qty
-    console.log
   }
 
-  doughChange(dough, index) {
-    this.pizzas[index].dough.id = dough
-  }
+  // doughChange(dough, index) {
+    // let qty = this.pizzas[index].dough.id
+    // let name = this.pizzas[index].dough.id
+    // let size = this.pizzas[index].dough.id
+    // this._httpClient.put('pizza-createds', {number: qty, pizza: name, dough: dough, pizza_size: size})
+    //   .subscribe(pizza => {
+    //     console.log(pizza)
+    //   });
+  // }
 
-  sizeChange(size, index) {
-    this.pizzas[index].pizza_size.id = size
-  }
+  // sizeChange(size, index) {
+  //   this.pizzas[index].pizza_size.id = size
+  // }
 
   getCart(id) {
     this._httpClient.get(`pizza-createds/${id}`)
@@ -67,13 +72,11 @@ export class CartComponent implements OnInit {
         this.cookieService.set('pizza', JSON.stringify(cookies));
       }
     }
-    console.log(this.pizzas)
     for(var i= 0; i < this.pizzas.length; i++){
       if (this.pizzas[i].id == id) {
         this.pizzas.splice(i, 1)
       }
     }
-    console.log(this.pizzas)
   }
 
   ngOnInit(): void {
